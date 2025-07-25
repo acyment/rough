@@ -20,7 +20,8 @@
       "Bash(rm:*)",
       "Bash(npm start)",
       "Bash(PORT=8082 npm start)",
-      "Bash(npx expo start:*)"
+      "Bash(npx expo start:*)",
+      "Bash(gh repo fork:*)"
     ],
     "deny": []
   }

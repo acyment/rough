@@ -1,187 +1,140 @@
-# RoughJS React Native Visual Tests
+# Rough React Native
 
-This directory contains visual tests for RoughJS React Native implementation using Expo. The tests verify that `rough.reactNativeSvg()` renders correctly across different platforms including React Native, iOS, Android, and Web (via Expo Web).
+A React Native port of [rough.js](https://roughjs.com/) - Create graphics with a hand-drawn, sketchy appearance for React Native applications using react-native-svg.
+
+## Overview
+
+This project is a fork and React Native adaptation of the excellent [rough.js](https://github.com/rough-stuff/rough) library by Preet Shihn. It enables you to create graphics with a sketchy, hand-drawn appearance in React Native applications.
 
 ## Features
 
-- **Cross-platform testing**: Tests run on React Native, iOS, Android, and Web
-- **Comprehensive coverage**: All major RoughJS drawing primitives are tested
-- **Visual verification**: Interactive test runner for manual visual inspection
-- **Expo integration**: Uses Expo for universal app development
-
-## Test Coverage
-
-The visual tests include:
-
-### Core Drawing Primitives
-- **Rectangle**: Basic rectangles with various fill styles and stroke options
-- **Line**: Straight lines with different styles, weights, and dash patterns
-- **Ellipse**: Circles and ellipses with various dimensions and fills
-- **Polygon**: Triangles, pentagons, stars, and custom polygons
-- **Curve**: Bezier curves with different fill styles
-- **Path**: SVG path commands including arcs and complex shapes
-
-### Fill Styles
-- `solid` - Solid color fills
-- `hachure` - Default hatching pattern (diagonal lines)
-- `cross-hatch` - Perpendicular hatching lines
-- `dots` - Dotted fill pattern
-- `zigzag` - Zigzag fill pattern
-
-### Style Options
-- **Stroke**: Color, width, dash patterns
-- **Fill**: Colors, transparency, patterns
-- **Roughness**: Control over sketch-like appearance
-- **Hachure**: Gap, angle, and weight customization
-
-## Prerequisites
-
-1. **RoughJS Build**: Ensure `bundled/rough.rn.js` exists
-   ```bash
-   # From project root
-   npm run build:rn
-   ```
-
-2. **Node.js**: Version 16 or higher
-3. **Expo CLI**: Install globally
-   ```bash
-   npm install -g @expo/cli
-   ```
+- ✅ Hand-drawn, sketchy graphics
+- ✅ React Native SVG support
+- ✅ Expo compatibility
+- ✅ Multiple fill styles (hachure, cross-hatch, dots, zigzag, etc.)
+- ✅ Customizable roughness and styling options
+- ✅ Visual test suite included
 
 ## Installation
 
 ```bash
-cd visual-tests/react-native
-npm install
+npm install rough-react-native react-native-svg
 ```
 
-## Running Tests
-
-### Automated Test Runner
-
-The test runner automatically installs dependencies and starts the appropriate platform:
-
+For Expo projects:
 ```bash
-# Web tests (default)
-npm test
-# or
-npm run test:web
-
-# iOS tests (requires iOS simulator/device)
-npm run test:ios
-
-# Android tests (requires Android emulator/device)
-npm run test:android
-
-# Custom port for web
-node test-runner.js web 3001
+npx expo install react-native-svg
 ```
 
-### Manual Testing
+## Usage
+
+```javascript
+import React from 'react';
+import { View } from 'react-native';
+import Svg from 'react-native-svg';
+import rough from 'rough-react-native';
+import { renderRoughShape } from 'rough-react-native/components/RoughRenderer';
+
+export default function App() {
+  const rc = rough.reactNativeSvg();
+
+  return (
+    <View style={{ flex: 1, justifyContent: 'center', alignItems: 'center' }}>
+      <Svg width={200} height={200}>
+        {renderRoughShape(rc.rectangle(10, 10, 150, 80, { 
+          fill: 'red', 
+          fillStyle: 'hachure',
+          stroke: 'blue',
+          strokeWidth: 2 
+        }))}
+        {renderRoughShape(rc.circle(100, 150, 60, { 
+          fill: 'green', 
+          fillStyle: 'dots' 
+        }))}
+      </Svg>
+    </View>
+  );
+}
+```
+
+## Visual Tests
+
+This project includes a comprehensive visual test suite demonstrating various shapes and styling options:
+
+- Rectangle tests with different fills
+- Circle and ellipse tests
+- Line and curve tests
+- Polygon tests
+- Path tests
+- Dashed line tests
+
+To run the visual tests:
 
 ```bash
-# Start Expo development server
 npm start
-
-# Then press:
-# 'w' for web
-# 'i' for iOS simulator
-# 'a' for Android emulator
 ```
 
-### Web Testing
+Then open the app in your preferred platform (iOS, Android, or Web).
 
-For web tests, navigate to `http://localhost:3000` (or specified port) after starting the server.
+## API
 
-## Test Structure
+The API closely follows the original rough.js library:
 
-```
-react-native/
-├── App.js                 # Main app with test navigation
-├── screens/              # Test screen components
-│   ├── RectangleTest.js  # Rectangle drawing tests
-│   ├── LineTest.js       # Line drawing tests
-│   ├── EllipseTest.js    # Ellipse/circle tests
-│   ├── PolygonTest.js    # Polygon drawing tests
-│   ├── CurveTest.js      # Curve drawing tests
-│   ├── PathTest.js       # SVG path tests
-│   └── DashedTest.js     # Dashed pattern tests
-├── test-runner.js        # Automated test runner
-└── package.json          # Dependencies and scripts
-```
+### Available Methods
 
-## Platform-Specific Notes
+- `rectangle(x, y, width, height, options)`
+- `circle(x, y, diameter, options)`
+- `ellipse(x, y, width, height, options)`
+- `line(x1, y1, x2, y2, options)`
+- `linearPath(points, options)`
+- `polygon(points, options)`
+- `arc(x, y, width, height, start, stop, closed, options)`
+- `curve(points, options)`
+- `path(pathString, options)`
 
-### Web (Expo Web)
-- Uses `react-native-web` to render React Native components in browser
-- SVG rendering via `react-native-svg` web implementation
-- Fastest testing environment for development
+### Options
 
-### iOS
-- Requires Xcode and iOS Simulator or physical device
-- Native SVG rendering performance
-- Test touch interactions and native feel
+- `stroke`: Stroke color
+- `strokeWidth`: Stroke width
+- `fill`: Fill color
+- `fillStyle`: 'hachure', 'solid', 'zigzag', 'cross-hatch', 'dots', 'dashed', 'zigzag-line'
+- `roughness`: Roughness level (default: 1)
+- `bowing`: Bowing level (default: 1)
+- `hachureAngle`: Angle of hachure lines
+- `hachureGap`: Gap between hachure lines
+- And many more...
 
-### Android
-- Requires Android Studio and emulator or physical device
-- Native Android SVG rendering
-- Test Android-specific behaviors
+## Attribution
 
-### React Native
-- Universal testing across all platforms
-- Consistent API regardless of platform
-- Platform-specific optimizations automatically applied
+This project is based on [rough.js](https://github.com/rough-stuff/rough) by Preet Shihn, adapted for React Native by Alan Cyment. The migration to React Native was assisted by [Claude Code](https://claude.ai/code).
 
-## Visual Verification
+### Original rough.js
 
-Since these are visual tests, verification is manual:
+- **Author**: Preet Shihn
+- **Repository**: https://github.com/rough-stuff/rough
+- **Website**: https://roughjs.com/
+- **License**: MIT
 
-1. **Launch the test runner** for your target platform
-2. **Navigate through test categories** using the horizontal tabs
-3. **Compare output** with expected results from original HTML tests
-4. **Verify cross-platform consistency** by running on multiple platforms
+## License
 
-## Expected Results
+MIT License - see [LICENSE](LICENSE) file for details.
 
-Each test should render rough, hand-drawn style graphics with:
-- Appropriate fill patterns and colors
-- Correct stroke styles and weights
-- Proper roughness and sketch-like appearance
-- Consistent behavior across platforms
-
-## Troubleshooting
-
-### Missing rough.rn.js
-```bash
-# From project root
-npm run build:rn
-```
-
-### Expo Dependencies
-```bash
-cd visual-tests/react-native
-rm -rf node_modules package-lock.json
-npm install
-```
-
-### Platform-Specific Issues
-- **iOS**: Ensure Xcode is installed and iOS Simulator is available
-- **Android**: Ensure Android Studio is installed with emulator
-- **Web**: Check that port 3000 (or specified port) is available
+This project maintains the same MIT license as the original rough.js library, with appropriate attribution to the original author.
 
 ## Contributing
 
-When adding new tests:
+Contributions are welcome! Please feel free to submit a Pull Request.
 
-1. Create a new screen component in `screens/`
-2. Add the component to `App.js` imports and tests array
-3. Follow existing patterns for styling and layout
-4. Test on all platforms before submitting
+## Changelog
 
-## Integration with Main Project
+### v1.0.0
+- Initial React Native port of rough.js
+- Added React Native SVG rendering support
+- Included comprehensive visual test suite
+- Expo compatibility
 
-These tests are part of the RoughJS visual test suite:
-- Located in `/visual-tests/react-native/`
-- Complements existing Canvas and SVG HTML tests
-- Uses the same test patterns adapted for React Native
-- Verifies React Native migration functionality
+## Links
+
+- [Original rough.js](https://github.com/rough-stuff/rough)
+- [react-native-svg](https://github.com/react-native-svg/react-native-svg)
+- [Expo](https://expo.dev/)

@@ -1,8 +1,29 @@
 {
-  "name": "rough-native-tests",
+  "name": "rough-react-native",
   "version": "1.0.0",
+  "description": "React Native port of rough.js - Create graphics with a hand-drawn, sketchy appearance",
   "main": "node_modules/expo/AppEntry.js",
-  "private": true,
+  "private": false,
+  "author": "Alan Cyment <acyment@users.noreply.github.com>",
+  "license": "MIT",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/acyment/rough-react-native.git"
+  },
+  "homepage": "https://github.com/acyment/rough-react-native#readme",
+  "bugs": {
+    "url": "https://github.com/acyment/rough-react-native/issues"
+  },
+  "keywords": [
+    "rough",
+    "react-native",
+    "svg",
+    "sketchy",
+    "hand-drawn",
+    "graphics",
+    "drawing",
+    "expo"
+  ],
   "scripts": {
     "start": "expo start",
     "android": "expo start --android",
