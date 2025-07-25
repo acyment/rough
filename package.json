@@ -13,7 +13,7 @@
   },
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/pshihn/rough.git"
+    "url": "git+https://github.com/acyment/rough-native.git"
   },
   "keywords": [
     "canvas",
@@ -29,7 +29,7 @@
   "author": "Preet Shihn <preetshihn@gmail.com>",
   "license": "MIT",
   "bugs": {
-    "url": "https://github.com/pshihn/rough/issues"
+    "url": "https://github.com/acyment/rough-native/issues"
   },
   "homepage": "https://roughjs.com",
   "devDependencies": {

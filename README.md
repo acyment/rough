@@ -1,9 +1,10 @@
-# Rough.js
+# rough-native
 
-<b>Rough.js</b> is a small (\<9 kB) graphics library that lets you draw in a _sketchy_, _hand-drawn-like_, style.
-The library defines primitives to draw lines, curves, arcs, polygons, circles, and ellipses. It also supports drawing [SVG paths](https://developer.mozilla.org/en-US/docs/Web/SVG/Tutorial/Paths).
+<b>rough-native</b> is a React Native/Expo migration of the original [Rough.js](https://roughjs.com) library. It's a small graphics library that lets you draw in a _sketchy_, _hand-drawn-like_, style in React Native applications.
 
-Rough.js works with both [Canvas](https://developer.mozilla.org/en-US/docs/Web/API/Canvas_API) and [SVG](https://developer.mozilla.org/en-US/docs/Web/SVG).
+This library defines primitives to draw lines, curves, arcs, polygons, circles, and ellipses. It also supports drawing [SVG paths](https://developer.mozilla.org/en-US/docs/Web/SVG/Tutorial/Paths).
+
+rough-native works with [react-native-svg](https://github.com/react-native-svg/react-native-svg) to render sketchy graphics in React Native and Expo applications.
 
 ![Rough.js sample](https://roughjs.com/images/cap_demo.png)
 
@@ -11,22 +12,24 @@ Rough.js works with both [Canvas](https://developer.mozilla.org/en-US/docs/Web/A
 
 ## Install
 
-from npm:
+Install rough-native and react-native-svg:
 
 ```
-npm install --save roughjs
+npm install --save rough-native react-native-svg
 ```
 
-Or get the latest using unpkg: https://unpkg.com/roughjs@latest/bundled/rough.js
-
+For Expo projects:
+```
+npx expo install rough-native react-native-svg
+```
 
 If you are looking for bundled version in different formats, the npm package will have these in the following locations:
 
-CommonJS: `roughjs/bundled/rough.cjs.js`
+CommonJS: `rough-native/bundled/rough.cjs.js`
 
-ESM: `roughjs/bundled/rough.esm.js`
+ESM: `rough-native/bundled/rough.esm.js`
 
-Browser IIFE: `roughjs/bundled/rough.js`
+React Native: `rough-native/bundled/rough.rn.js`
 
 
 ## Usage

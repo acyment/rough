@@ -24,7 +24,10 @@
       "Bash(gh repo fork:*)",
       "Bash(git branch:*)",
       "Bash(git push:*)",
-      "Bash(git config:*)"
+      "Bash(git config:*)",
+      "Bash(gh repo rename:*)",
+      "Bash(git remote set-url:*)",
+      "Bash(gh repo edit:*)"
     ],
     "deny": []
   }
