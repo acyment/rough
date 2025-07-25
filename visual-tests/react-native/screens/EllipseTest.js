@@ -1,0 +1,91 @@
+import React from 'react';
+import { View, Text, StyleSheet } from 'react-native';
+import Svg, { Path, G } from 'react-native-svg';
+import rough from '../rough.rn.js';
+
+export default function EllipseTest() {
+  const rc = rough.reactNativeSvg();
+  
+  const renderRoughShape = (shape) => (
+    <G key={Math.random()}>
+      {shape.children.map((child, index) => (
+        <Path key={index} {...child.props} />
+      ))}
+    </G>
+  );
+
+  return (
+    <View style={styles.container}>
+      <Text style={styles.sectionTitle}>Ellipse Tests</Text>
+      
+      <View style={styles.testGroup}>
+        <Text style={styles.testLabel}>Basic ellipses and circles</Text>
+        <View style={styles.svgContainer}>
+          <Svg width={600} height={120} style={styles.svg}>
+            {renderRoughShape(rc.ellipse(50, 60, 80, 80))}
+            {renderRoughShape(rc.ellipse(150, 60, 80, 80, { fill: 'red' }))}
+            {renderRoughShape(rc.ellipse(250, 60, 80, 80, { fill: 'pink', fillStyle: 'solid' }))}
+            {renderRoughShape(rc.ellipse(350, 60, 80, 80, { fill: 'red', fillStyle: 'cross-hatch' }))}
+            {renderRoughShape(rc.ellipse(450, 60, 80, 80, { fill: 'red', fillStyle: 'zigzag', hachureGap: 8 }))}
+            {renderRoughShape(rc.ellipse(550, 60, 80, 80, { fill: 'red', fillStyle: 'dots' }))}
+          </Svg>
+        </View>
+      </View>
+
+      <View style={styles.testGroup}>
+        <Text style={styles.testLabel}>Ellipses with different dimensions</Text>
+        <View style={styles.svgContainer}>
+          <Svg width={600} height={150} style={styles.svg}>
+            {renderRoughShape(rc.ellipse(80, 75, 120, 50, { fill: 'lightblue' }))}
+            {renderRoughShape(rc.ellipse(240, 75, 50, 120, { fill: 'lightgreen' }))}
+            {renderRoughShape(rc.ellipse(380, 75, 150, 80, { fill: 'yellow', fillStyle: 'cross-hatch' }))}
+            {renderRoughShape(rc.ellipse(550, 75, 80, 100, { fill: 'orange', fillStyle: 'dots', hachureGap: 6 }))}
+          </Svg>
+        </View>
+      </View>
+
+      <View style={styles.testGroup}>
+        <Text style={styles.testLabel}>Styled ellipses</Text>
+        <View style={styles.svgContainer}>
+          <Svg width={500} height={150} style={styles.svg}>
+            {renderRoughShape(rc.ellipse(80, 75, 100, 80, { roughness: 2 }))}
+            {renderRoughShape(rc.ellipse(200, 75, 100, 80, { fill: 'red', stroke: 'blue', strokeWidth: 4 }))}
+            {renderRoughShape(rc.ellipse(320, 75, 100, 80, { fill: 'pink', fillWeight: 3, hachureGap: 12, hachureAngle: 45 }))}
+            {renderRoughShape(rc.ellipse(440, 75, 100, 80, { stroke: 'purple', strokeWidth: 3, roughness: 0.5 }))}
+          </Svg>
+        </View>
+      </View>
+    </View>
+  );
+}
+
+const styles = StyleSheet.create({
+  container: {
+    flex: 1,
+  },
+  sectionTitle: {
+    fontSize: 18,
+    fontWeight: 'bold',
+    marginBottom: 20,
+    textAlign: 'center',
+  },
+  testGroup: {
+    marginBottom: 30,
+  },
+  testLabel: {
+    fontSize: 14,
+    fontWeight: '600',
+    marginBottom: 10,
+    color: '#333',
+  },
+  svgContainer: {
+    backgroundColor: '#f9f9f9',
+    borderRadius: 8,
+    padding: 10,
+    alignItems: 'center',
+  },
+  svg: {
+    backgroundColor: 'white',
+    borderRadius: 4,
+  },
+});

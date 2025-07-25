@@ -1,0 +1,109 @@
+import React from 'react';
+import { View, Text, StyleSheet } from 'react-native';
+import Svg, { Path, G } from 'react-native-svg';
+import rough from '../rough.rn.js';
+
+export default function PolygonTest() {
+  const rc = rough.reactNativeSvg();
+  
+  const renderRoughShape = (shape) => (
+    <G key={Math.random()}>
+      {shape.children.map((child, index) => (
+        <Path key={index} {...child.props} />
+      ))}
+    </G>
+  );
+
+  const triangle = [[50, 10], [10, 80], [90, 80]];
+  const pentagon = [[100, 10], [120, 30], [110, 60], [80, 60], [70, 30]];
+  const star = [[150, 10], [160, 30], [180, 30], [165, 45], [170, 65], [150, 55], [130, 65], [135, 45], [120, 30], [140, 30]];
+
+  return (
+    <View style={styles.container}>
+      <Text style={styles.sectionTitle}>Polygon Tests</Text>
+      
+      <View style={styles.testGroup}>
+        <Text style={styles.testLabel}>Basic polygons</Text>
+        <View style={styles.svgContainer}>
+          <Svg width={600} height={100} style={styles.svg}>
+            {renderRoughShape(rc.polygon(triangle))}
+            {renderRoughShape(rc.polygon(triangle.map(([x, y]) => [x + 100, y]), { fill: 'red' }))}
+            {renderRoughShape(rc.polygon(triangle.map(([x, y]) => [x + 200, y]), { fill: 'pink', fillStyle: 'solid' }))}
+            {renderRoughShape(rc.polygon(triangle.map(([x, y]) => [x + 300, y]), { fill: 'blue', fillStyle: 'cross-hatch' }))}
+            {renderRoughShape(rc.polygon(triangle.map(([x, y]) => [x + 400, y]), { fill: 'green', fillStyle: 'zigzag' }))}
+            {renderRoughShape(rc.polygon(triangle.map(([x, y]) => [x + 500, y]), { fill: 'orange', fillStyle: 'dots' }))}
+          </Svg>
+        </View>
+      </View>
+
+      <View style={styles.testGroup}>
+        <Text style={styles.testLabel}>Different polygon shapes</Text>
+        <View style={styles.svgContainer}>
+          <Svg width={400} height={100} style={styles.svg}>
+            {renderRoughShape(rc.polygon(triangle, { fill: 'lightblue', fillStyle: 'zigzag' }))}
+            {renderRoughShape(rc.polygon(pentagon.map(([x, y]) => [x + 50, y]), { fill: 'lightgreen', fillStyle: 'cross-hatch' }))}
+            {renderRoughShape(rc.polygon(star.map(([x, y]) => [x + 100, y]), { fill: 'gold', fillStyle: 'dots', hachureGap: 4 }))}
+          </Svg>
+        </View>
+      </View>
+
+      <View style={styles.testGroup}>
+        <Text style={styles.testLabel}>Styled polygons</Text>
+        <View style={styles.svgContainer}>
+          <Svg width={500} height={120} style={styles.svg}>
+            {renderRoughShape(rc.polygon(triangle.map(([x, y]) => [x, y + 20]), { roughness: 2, stroke: 'red', strokeWidth: 3 }))}
+            {renderRoughShape(rc.polygon(pentagon.map(([x, y]) => [x + 100, y + 20]), { 
+              fill: 'purple', 
+              stroke: 'darkblue', 
+              strokeWidth: 2, 
+              fillWeight: 4, 
+              hachureGap: 8 
+            }))}
+            {renderRoughShape(rc.polygon(star.map(([x, y]) => [x + 200, y + 20]), { 
+              fill: 'red', 
+              fillStyle: 'zigzag', 
+              hachureAngle: 45, 
+              roughness: 0.8 
+            }))}
+            {renderRoughShape(rc.polygon([[350, 30], [450, 30], [480, 80], [320, 80]], { 
+              fill: 'cyan', 
+              fillStyle: 'cross-hatch', 
+              hachureGap: 10 
+            }))}
+          </Svg>
+        </View>
+      </View>
+    </View>
+  );
+}
+
+const styles = StyleSheet.create({
+  container: {
+    flex: 1,
+  },
+  sectionTitle: {
+    fontSize: 18,
+    fontWeight: 'bold',
+    marginBottom: 20,
+    textAlign: 'center',
+  },
+  testGroup: {
+    marginBottom: 30,
+  },
+  testLabel: {
+    fontSize: 14,
+    fontWeight: '600',
+    marginBottom: 10,
+    color: '#333',
+  },
+  svgContainer: {
+    backgroundColor: '#f9f9f9',
+    borderRadius: 8,
+    padding: 10,
+    alignItems: 'center',
+  },
+  svg: {
+    backgroundColor: 'white',
+    borderRadius: 4,
+  },
+});

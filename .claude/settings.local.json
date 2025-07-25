@@ -1,0 +1,27 @@
+{
+  "permissions": {
+    "allow": [
+      "Bash(npm run build:*)",
+      "Bash(bun run:*)",
+      "Bash(mkdir:*)",
+      "Bash(chmod:*)",
+      "Bash(npm run test:web:*)",
+      "Bash(npm install:*)",
+      "Bash(timeout 15s npm run test:web)",
+      "Bash(true)",
+      "Bash(ls:*)",
+      "Bash(timeout 10s npm run test:web)",
+      "Bash(cp:*)",
+      "Bash(timeout 8s npm run test:web)",
+      "Bash(find:*)",
+      "Bash(node:*)",
+      "Bash(grep:*)",
+      "Bash(pkill:*)",
+      "Bash(rm:*)",
+      "Bash(npm start)",
+      "Bash(PORT=8082 npm start)",
+      "Bash(npx expo start:*)"
+    ],
+    "deny": []
+  }
+}

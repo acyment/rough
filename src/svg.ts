@@ -1,6 +1,7 @@
 import { Config, Options, OpSet, ResolvedOptions, Drawable, SVGNS } from './core';
 import { RoughGenerator } from './generator';
 import { Point } from './geometry';
+import { Platform } from './platform';
 
 export class RoughSVG {
   private gen: RoughGenerator;
@@ -14,7 +15,7 @@ export class RoughSVG {
   draw(drawable: Drawable): SVGGElement {
     const sets = drawable.sets || [];
     const o = drawable.options || this.getDefaultOptions();
-    const doc = this.svg.ownerDocument || window.document;
+    const doc = this.svg.ownerDocument || Platform.getDocument!();
     const g = doc.createElementNS(SVGNS, 'g');
     const precision = drawable.options.fixedDecimalPlaceDigits;
     for (const drawing of sets) {

@@ -41,5 +41,18 @@ export default [
         comments: false
       }
     })]
+  },
+  {
+    input: 'src/rough.ts',
+    output: {
+      file: 'bundled/rough.rn.js',
+      format: 'esm'
+    },
+    external: ['react-native-svg'],
+    plugins: [nodeResolve(), typescript({ target: "es2015", importHelpers: true }), terser({
+      output: {
+        comments: false
+      }
+    })]
   }
 ];

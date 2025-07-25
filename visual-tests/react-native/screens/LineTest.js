@@ -1,0 +1,83 @@
+import React from 'react';
+import { View, Text, StyleSheet } from 'react-native';
+import Svg, { Path, G } from 'react-native-svg';
+import rough from '../rough.rn.js';
+
+export default function LineTest() {
+  const rc = rough.reactNativeSvg();
+  
+  const renderRoughShape = (shape) => (
+    <G key={Math.random()}>
+      {shape.children.map((child, index) => (
+        <Path key={index} {...child.props} />
+      ))}
+    </G>
+  );
+
+  return (
+    <View style={styles.container}>
+      <Text style={styles.sectionTitle}>Line Tests</Text>
+      
+      <View style={styles.testGroup}>
+        <Text style={styles.testLabel}>Basic lines</Text>
+        <View style={styles.svgContainer}>
+          <Svg width={400} height={300} style={styles.svg}>
+            {renderRoughShape(rc.line(10, 10, 200, 10))}
+            {renderRoughShape(rc.line(10, 30, 200, 30, { stroke: 'red', strokeWidth: 3 }))}
+            {renderRoughShape(rc.line(10, 60, 200, 60, { roughness: 2 }))}
+            {renderRoughShape(rc.line(10, 90, 200, 90, { roughness: 0.5 }))}
+            {renderRoughShape(rc.line(10, 120, 200, 120, { stroke: 'blue', strokeWidth: 5, roughness: 1.5 }))}
+            
+            {renderRoughShape(rc.line(10, 150, 50, 250))}
+            {renderRoughShape(rc.line(70, 150, 110, 250, { stroke: 'green', strokeWidth: 2 }))}
+            {renderRoughShape(rc.line(130, 150, 170, 250, { roughness: 3 }))}
+            {renderRoughShape(rc.line(190, 150, 230, 250, { stroke: 'purple', strokeWidth: 4, roughness: 0.2 }))}
+          </Svg>
+        </View>
+      </View>
+
+      <View style={styles.testGroup}>
+        <Text style={styles.testLabel}>Dashed lines</Text>
+        <View style={styles.svgContainer}>
+          <Svg width={400} height={150} style={styles.svg}>
+            {renderRoughShape(rc.line(10, 20, 300, 20, { stroke: 'black', strokeWidth: 2, strokeLineDash: [5, 5] }))}
+            {renderRoughShape(rc.line(10, 50, 300, 50, { stroke: 'red', strokeWidth: 3, strokeLineDash: [10, 5] }))}
+            {renderRoughShape(rc.line(10, 80, 300, 80, { stroke: 'blue', strokeWidth: 2, strokeLineDash: [15, 10, 5, 10] }))}
+            {renderRoughShape(rc.line(10, 110, 300, 110, { stroke: 'green', strokeWidth: 4, strokeLineDash: [20, 10], roughness: 2 }))}
+          </Svg>
+        </View>
+      </View>
+    </View>
+  );
+}
+
+const styles = StyleSheet.create({
+  container: {
+    flex: 1,
+  },
+  sectionTitle: {
+    fontSize: 18,
+    fontWeight: 'bold',
+    marginBottom: 20,
+    textAlign: 'center',
+  },
+  testGroup: {
+    marginBottom: 30,
+  },
+  testLabel: {
+    fontSize: 14,
+    fontWeight: '600',
+    marginBottom: 10,
+    color: '#333',
+  },
+  svgContainer: {
+    backgroundColor: '#f9f9f9',
+    borderRadius: 8,
+    padding: 10,
+    alignItems: 'center',
+  },
+  svg: {
+    backgroundColor: 'white',
+    borderRadius: 4,
+  },
+});
